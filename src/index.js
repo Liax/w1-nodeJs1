@@ -17,12 +17,7 @@ app.get("/", (req, res) => {
 
 const start = async () => {
 	await dataSource.initialize();
-	await dataSource
-		.createQueryBuilder()
-		.insert()
-		.into(Wilders)
-		.values([{ name: "Fourth Wilder" }, { name: "Fifth Wilder" }])
-		.execute();
+	dataSource.getRepository(Wilders).save({ name: "First Wilder" });
 	app.listen(3000, () => console.log("Server started on 3000"));
 };
 
