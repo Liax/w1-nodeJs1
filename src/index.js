@@ -1,23 +1,18 @@
 const express = require("express");
-const typeorm = require("typeorm");
-const Wilders = require("./entity/Wilders");
+const wildersController = require("./controller/wilders");
+const { dataSource } = require("./db");
 
 const app = express();
 
-const dataSource = new typeorm.DataSource({
-	type: "sqlite",
-	database: "./wildersdb.sqlite",
-	synchronize: true,
-	entities: [require("./entity/Wilders")],
-});
+app.use(express.json());
 
-app.get("/", (req, res) => {
-	res.send("Hello World");
-});
+app.post("/api/wilder", wildersController.create);
+app.get("/api/wilder", wildersController.find);
+app.put("/api/wilder", wildersController.update);
+app.delete("/api/wilder", wildersController.delete);
 
 const start = async () => {
 	await dataSource.initialize();
-	dataSource.getRepository(Wilders).save({ name: "First Wilder" });
 	app.listen(3000, () => console.log("Server started on 3000"));
 };
 
