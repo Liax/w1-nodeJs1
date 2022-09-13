@@ -6,10 +6,10 @@ const app = express();
 
 app.use(express.json());
 
-app.post("/api/wilder", wildersController.create);
-app.get("/api/wilder", wildersController.find);
-app.put("/api/wilder", wildersController.update);
-app.delete("/api/wilder", wildersController.delete);
+app.post("/wilders", wildersController.create);
+app.get("/wilders", wildersController.read);
+app.patch("/wilders/:id", wildersController.update);
+app.delete("/wilders/:id", wildersController.delete);
 
 const start = async () => {
 	await dataSource.initialize();
