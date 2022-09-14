@@ -1,7 +1,7 @@
 const EntitySchema = require("typeorm").EntitySchema;
 
 module.exports = new EntitySchema({
-	name: "Wilder",
+	name: "Skill",
 	columns: {
 		id: {
 			primary: true,
@@ -10,15 +10,7 @@ module.exports = new EntitySchema({
 		},
 		name: {
 			type: "text",
-		},
-	},
-
-	relations: {
-		skills: {
-			target: "Skill",
-			type: "many-to-many",
-			joinTable: true,
-			eager: true,
+			unique: true,
 		},
 	},
 });
