@@ -1,7 +1,19 @@
 import blank_profile from "../assets/blank_profil.png";
 import Skills from "./Skills.js";
 
-export default function CardWilders({ name, skills }) {
+import { deleteWilder } from "../services/wilders";
+
+export default function CardWilders({ name, skills = [], id, fetchWilders }) {
+	const handleDelete = async (e) => {
+		e.preventDefault();
+		try {
+			const res = await deleteWilder(id);
+			console.log("wilder created", res.data);
+			fetchWilders();
+		} catch (error) {
+			console.error(error);
+		}
+	};
 	return (
 		<article className="card">
 			<img src={blank_profile} alt="Profile" />
@@ -18,6 +30,9 @@ export default function CardWilders({ name, skills }) {
 					<Skills key={skill.id} name={skill.name} rate={skill.rate} />
 				))}
 			</ul>
+			<button onClick={handleDelete} value={id}>
+				Supprimer
+			</button>
 		</article>
 	);
 }

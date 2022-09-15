@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const wildersController = require("./controller/wilders");
 const skillsController = require("./controller/skills");
 const { dataSource } = require("./db");
@@ -6,6 +7,7 @@ const { dataSource } = require("./db");
 const app = express();
 
 app.use(express.json());
+app.use(cors());
 
 app.post("/wilders", wildersController.create);
 app.get("/wilders", wildersController.read);
@@ -22,7 +24,7 @@ app.delete("/skills/:id", skillsController.delete);
 
 const start = async () => {
 	await dataSource.initialize();
-	app.listen(3000, () => console.log("Server started on 3000"));
+	app.listen(5000, () => console.log("Server started on 5000"));
 };
 
 start();

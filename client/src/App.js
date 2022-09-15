@@ -1,44 +1,45 @@
 import "./App.css";
-import CardWilders from "./components/CardWilders.js";
+import { useEffect, useState } from "react";
+import CardWilders from "./components/CardWilders";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import FormWilder from "./components/FormWilder";
+import { getAllWilder } from "./services/wilders";
 
 function App() {
-	const wilders = [
-		{
-			id: 1,
-			name: "John",
-			skills: [
-				{ id: 1, name: "PHP", rate: "5" },
-				{ id: 2, name: "JS", rate: "2" },
-			],
-		},
-		{ id: 2, name: "Jane", skills: [{ id: 2, name: "JS", rate: "5" }] },
-		{ id: 3, name: "Jack", skills: [{ id: 1, name: "PHP", rate: "6" }] },
-	];
+	const [wilders, setwilders] = useState([]);
+
+	const fetchWilders = async () => {
+		try {
+			setwilders(await getAllWilder());
+		} catch (error) {
+			console.error(error);
+		}
+	};
+	useEffect(() => {
+		fetchWilders();
+	}, []);
+
 	return (
-		<div className="App">
-			<header>
-				<div className="container">
-					<h1>Wilders Book</h1>
-				</div>
-			</header>
+		<>
+			<Header />
 			<main className="container">
+				<FormWilder fetchWilders={fetchWilders} setwilders={setwilders} />
 				<h2>Wilders</h2>
 				<section className="card-row">
 					{wilders.map((wilder) => (
 						<CardWilders
 							key={wilder.id}
+							id={wilder.id}
 							name={wilder.name}
 							skills={wilder.skills}
+							fetchWilders={fetchWilders}
 						/>
 					))}
 				</section>
 			</main>
-			<footer>
-				<div className="container">
-					<p>&copy; 2022 Wild Code School</p>
-				</div>
-			</footer>
-		</div>
+			<Footer />
+		</>
 	);
 }
 
