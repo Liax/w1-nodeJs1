@@ -5,9 +5,11 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import FormWilder from "./components/FormWilder";
 import { getAllWilder } from "./services/wilders";
+import { getAllSkills } from "./services/skills";
 
 function App() {
 	const [wilders, setwilders] = useState([]);
+	const [skills, setSkills] = useState([]);
 
 	const fetchWilders = async () => {
 		try {
@@ -20,11 +22,26 @@ function App() {
 		fetchWilders();
 	}, []);
 
+	const fetchSkills = async () => {
+		try {
+			setSkills(await getAllSkills());
+		} catch (error) {
+			console.error(error);
+		}
+	};
+	useEffect(() => {
+		fetchSkills();
+	}, []);
+
 	return (
 		<>
 			<Header />
 			<main className="container">
-				<FormWilder fetchWilders={fetchWilders} setwilders={setwilders} />
+				<FormWilder
+					fetchWilders={fetchWilders}
+					setwilders={setwilders}
+					skills={skills}
+				/>
 				<h2>Wilders</h2>
 				<section className="card-row">
 					{wilders.map((wilder) => (
