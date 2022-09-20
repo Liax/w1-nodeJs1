@@ -1,0 +1,22 @@
+POST http://localhost:3000/skills
+Content-Type: application/json
+
+{
+	"name": "Vscode"
+}
+
+###
+GET http://localhost:3000/skills
+
+
+###
+PATCH http://localhost:3000/skills/4
+Content-Type: application/json
+
+{
+	"name": "Php"
+}
+
+###
+DELETE http://localhost:3000/skills/2
+Content-Type: application/json

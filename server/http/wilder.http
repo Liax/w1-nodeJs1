@@ -1,0 +1,21 @@
+POST http://localhost:5000/wilders
+Content-Type: application/json
+
+{
+	"name": "Lupon true"
+}
+
+###
+GET http://localhost:5000/wilders
+
+###
+PATCH http://localhost:5000/wilders/8
+Content-Type: application/json
+
+{
+	"name": "Albert"
+}
+
+###
+DELETE http://localhost:5000/wilders/8
+Content-Type: application/json
