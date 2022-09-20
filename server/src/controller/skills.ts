@@ -1,7 +1,8 @@
-const dataSource = require("../db").dataSource;
-const Skill = require("../entity/Skill");
+import dataSource from "../db";
+import Skill from "../entity/Skill";
+import { IController } from "../types/IController";
 
-module.exports = {
+const skillsController: IController = {
 	create: async (req, res) => {
 		const { name } = req.body;
 		if (name.length > 100 || name.length === 0)
@@ -64,3 +65,5 @@ module.exports = {
 		}
 	},
 };
+
+export default skillsController;

@@ -1,9 +1,12 @@
-const dataSource = require("../db").dataSource;
-const Wilder = require("../entity/Wilder");
-const Skill = require("../entity/Skill");
+import dataSource from "../db";
+import Skill from "../entity/Skill";
+import Wilder from "../entity/Wilder";
+import { Request } from "express";
 
-module.exports = {
-	create: async (req, res) => {
+import { IController } from "../types/IController";
+
+const wildersController: IController = {
+	create: async (req: Request, res) => {
 		const { name } = req.body;
 		if (name.length > 100 || name.length === 0)
 			return res
@@ -101,3 +104,5 @@ module.exports = {
 		}
 	},
 };
+
+export default wildersController;
