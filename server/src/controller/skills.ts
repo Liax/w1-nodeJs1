@@ -16,7 +16,7 @@ const skillsController: IController = {
 			.getRepository(Skill)
 			.findOneBy({ name });
 
-		if (existingSkill) {
+		if (existingSkill !== null) {
 			return res.status(409).send("a skill with this name already exist");
 		}
 		try {
@@ -46,7 +46,7 @@ const skillsController: IController = {
 			const { affected } = await dataSource
 				.getRepository(Skill)
 				.update(req.params.id, { name });
-			if (affected) return res.send("skill updated");
+			if (affected != null) return res.send("skill updated");
 			res.sendStatus(404);
 		} catch (err) {
 			res.send("Error while updating the skill");
@@ -58,7 +58,7 @@ const skillsController: IController = {
 			const { affected } = await dataSource
 				.getRepository(Skill)
 				.delete(req.params.id);
-			if (affected) return res.send("Skill succesfully deleted");
+			if (affected !== 0) return res.send("Skill succesfully deleted");
 			res.sendStatus(404);
 		} catch (error) {
 			res.send("Error while deleting a skill");

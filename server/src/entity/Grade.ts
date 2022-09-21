@@ -11,10 +11,10 @@ class Grade {
 	votes: number;
 
 	@Column()
-	idSkill: number;
+	skillId: number;
 
 	@Column()
-	idWilder: number;
+	wilderId: number;
 
 	@ManyToOne(() => Wilder, (w) => w.grades)
 	wilder: Wilder;

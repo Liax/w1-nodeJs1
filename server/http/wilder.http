@@ -2,20 +2,22 @@ POST http://localhost:5000/wilders
 Content-Type: application/json
 
 {
-	"name": "Lupon true"
+	"name": "Lupon true",
+	"city": "SXB",
+	"bio": "Biovioviovio"
 }
 
 ###
 GET http://localhost:5000/wilders
 
 ###
-PATCH http://localhost:5000/wilders/8
+PATCH http://localhost:5000/wilders/4
 Content-Type: application/json
 
 {
-	"name": "Albert"
+	"city": "London"
 }
 
 ###
-DELETE http://localhost:5000/wilders/8
+DELETE http://localhost:5000/wilders/5
 Content-Type: application/json

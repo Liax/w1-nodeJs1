@@ -1,10 +1,10 @@
-POST http://localhost:5000/wilders/7/skills
+POST http://localhost:5000/wilders/1/skills
 Content-Type: application/json
 
 {
-	"skillId": 5
+	"skillId": 2
 }
 
 ###
-DELETE http://localhost:5000/wilders/7/skills/1
+DELETE http://localhost:5000/wilders/1/skills/1
 Content-Type: application/json

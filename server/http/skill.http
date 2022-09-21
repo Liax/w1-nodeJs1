@@ -1,16 +1,16 @@
-POST http://localhost:3000/skills
+POST http://localhost:5000/skills
 Content-Type: application/json
 
 {
-	"name": "Vscode"
+	"name": "Test"
 }
 
 ###
-GET http://localhost:3000/skills
+GET http://localhost:5000/skills
 
 
 ###
-PATCH http://localhost:3000/skills/4
+PATCH http://localhost:5000/skills/1
 Content-Type: application/json
 
 {
@@ -18,5 +18,5 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:3000/skills/2
+DELETE http://localhost:5000/skills/4
 Content-Type: application/json
