@@ -1,19 +1,18 @@
-import "./App.css";
 import { useEffect, useState } from "react";
-import CardWilders from "./components/CardWilders";
-import Header from "./components/Header";
+import "./App.css";
 import Footer from "./components/Footer";
+import CardWilders from "./components/CardWilders";
 import FormWilder from "./components/FormWilder";
+import Header from "./components/Header";
 import { getAllWilder } from "./services/wilders";
-import { getAllSkills } from "./services/skills";
+import { IWilder } from "./types/IWilder";
 
 function App() {
-	const [wilders, setwilders] = useState([]);
-	const [skills, setSkills] = useState([]);
+	const [wilders, setWilders] = useState<IWilder[]>([]);
 
 	const fetchWilders = async () => {
 		try {
-			setwilders(await getAllWilder());
+			setWilders(await getAllWilder());
 		} catch (error) {
 			console.error(error);
 		}
@@ -22,34 +21,17 @@ function App() {
 		fetchWilders();
 	}, []);
 
-	const fetchSkills = async () => {
-		try {
-			setSkills(await getAllSkills());
-		} catch (error) {
-			console.error(error);
-		}
-	};
-	useEffect(() => {
-		fetchSkills();
-	}, []);
-
 	return (
 		<>
 			<Header />
 			<main className="container">
-				<FormWilder
-					fetchWilders={fetchWilders}
-					setwilders={setwilders}
-					skills={skills}
-				/>
+				<FormWilder fetchWilders={fetchWilders} />
 				<h2>Wilders</h2>
 				<section className="card-row">
 					{wilders.map((wilder) => (
 						<CardWilders
 							key={wilder.id}
-							id={wilder.id}
-							name={wilder.name}
-							skills={wilder.skills}
+							wilder={wilder}
 							fetchWilders={fetchWilders}
 						/>
 					))}
