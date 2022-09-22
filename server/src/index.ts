@@ -11,6 +11,7 @@ app.use(cors());
 
 app.post("/wilders", wildersController.create);
 app.get("/wilders", wildersController.read);
+app.get("/wilders/:id", wildersController.readOne);
 app.patch("/wilders/:id", wildersController.update);
 app.delete("/wilders/:id", wildersController.delete);
 

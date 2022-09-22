@@ -1,9 +1,10 @@
+import { Link } from "react-router-dom";
 import blank_profile from "../assets/blank_profil.png";
 import { deleteWilder } from "../services/wilders";
 import { IWilder } from "../types/IWilder";
 import Skills from "./Skills";
 
-interface WilderProps {
+export interface WilderProps {
 	wilder: IWilder;
 	fetchWilders: () => void;
 }
@@ -35,6 +36,9 @@ export default function CardWilders({
 			</ul>
 			<button onClick={handleDelete} value={id}>
 				Supprimer
+			</button>
+			<button>
+				<Link to={`/wilders/${id}`}>Détails</Link>
 			</button>
 		</article>
 	);

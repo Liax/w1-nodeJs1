@@ -43,6 +43,27 @@ const wildersController: IController = {
 			res.send("Error while fetching wilder");
 		}
 	},
+	readOne: async (req, res) => {
+		try {
+			const id = parseInt(req.params.id, 10);
+			const wilder = await dataSource
+				.getRepository(Wilder)
+				.findOne({ where: { id }, relations: { grades: { skill: true } } });
+			wilder !== null
+				? res.send({
+						...wilder,
+						grades: undefined,
+						skills: wilder?.grades.map((g) => ({
+							id: g.skill.id,
+							name: g.skill.name,
+							vote: g.votes,
+						})),
+				  })
+				: res.send("Wilder not found");
+		} catch (err) {
+			res.send("Error while fetching wilder");
+		}
+	},
 
 	update: async (req, res) => {
 		const { name } = req.body;
@@ -86,7 +107,7 @@ const wildersController: IController = {
 
 			const skillToAdd = await dataSource
 				.getRepository(Skill)
-				.findOneBy({ id: req.body.skillId });
+				.findOneBy({ id: parseInt(req.params.skillId, 10) });
 			if (skillToAdd === null) return res.status(404).send("Skill not found");
 
 			await dataSource

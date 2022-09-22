@@ -42,6 +42,14 @@ header {
 	color: #fff;
 }
 
+header nav {
+	color: #eddbff;
+}
+
+header nav a:not(:first-child) {
+	margin-left: 15px;
+}
+
 footer {
 	border-top: 2px solid #f76c6c;
 }

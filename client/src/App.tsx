@@ -1,42 +1,20 @@
-import { useEffect, useState } from "react";
+import { Route, Routes } from "react-router";
 import "./App.css";
 import Footer from "./components/Footer";
-import CardWilders from "./components/CardWilders";
-import FormWilder from "./components/FormWilder";
 import Header from "./components/Header";
-import { getAllWilder } from "./services/wilders";
-import { IWilder } from "./types/IWilder";
+import WilderPge from "./screen/WilderPge";
+import WilderDetail from "./screen/WilderDetail";
+import SkillsPge from "./screen/SkillsPge";
 
 function App() {
-	const [wilders, setWilders] = useState<IWilder[]>([]);
-
-	const fetchWilders = async () => {
-		try {
-			setWilders(await getAllWilder());
-		} catch (error) {
-			console.error(error);
-		}
-	};
-	useEffect(() => {
-		fetchWilders();
-	}, []);
-
 	return (
 		<>
 			<Header />
-			<main className="container">
-				<FormWilder fetchWilders={fetchWilders} />
-				<h2>Wilders</h2>
-				<section className="card-row">
-					{wilders.map((wilder) => (
-						<CardWilders
-							key={wilder.id}
-							wilder={wilder}
-							fetchWilders={fetchWilders}
-						/>
-					))}
-				</section>
-			</main>
+			<Routes>
+				<Route path="/" element={<WilderPge />}></Route>
+				<Route path="/wilders/:id" element={<WilderDetail />}></Route>
+				<Route path="/skills" element={<SkillsPge />}></Route>
+			</Routes>
 			<Footer />
 		</>
 	);

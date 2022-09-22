@@ -11,3 +11,9 @@ export interface IWilder {
 	bio: string | null;
 	skills: ISkillOfWilder[];
 }
+
+export interface IWilderCreate {
+	name: string;
+	city?: string;
+	bio?: string;
+}
